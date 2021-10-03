@@ -1,0 +1,17 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: sink-job
+  namespace: tfm
+spec:
+  schedule: "*/1 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: sink-job
+            image: tonihurtado/sinkjob:latest
+            imagePullPolicy: IfNotPresent
+            command: ["python3", "/app/update-db.py"]
+          restartPolicy: OnFailure

@@ -1,0 +1,4 @@
+kubernetes/deprecated
+datalake/
+prediction-web/node_modules
+prediction-web/package.json
