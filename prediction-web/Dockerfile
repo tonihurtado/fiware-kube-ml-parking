@@ -3,7 +3,7 @@
 FROM node:12.18.1
 ENV NODE_ENV=production
 ENV MONGO_URI=mongodb://mongodb-0.mongodb-svc.tfm.svc.cluster.local:27017,mongodb-1.mongodb-svc.tfm.svc.cluster.local:27017,mongodb-2.mongodb-svc.tfm.svc.cluster.local:27017/?replicaSet=MainRepSet
-ENV URL_CB=http://orion.tfm:1026/v2/entities
+ENV URL_CB=http://orion.tfm:1026/v2/entities/ReqTicketPrediction1/attrs
 WORKDIR /app
 COPY ["package.json", "package-lock.json*", "./"]
 RUN npm install --production

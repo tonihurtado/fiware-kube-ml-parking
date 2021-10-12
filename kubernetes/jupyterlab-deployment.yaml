@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: jupyterlab
-          image: tonihurtado/pyspark-notebook:1.0.2
+          image: tonihurtado/pyspark-notebook:1.1
           imagePullPolicy: IfNotPresent
           env:
           - name: CHOWN_HOME
