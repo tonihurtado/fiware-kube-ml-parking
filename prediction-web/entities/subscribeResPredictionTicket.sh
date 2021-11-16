@@ -1,4 +1,4 @@
-curl -v http://192.168.49.2:31149/v2/subscriptions -s -S -H 'Content-Type: application/json' -d @- <<EOF
+curl -v  http://192.168.49.2:30467/v2/subscriptions -s -S -H 'Content-Type: application/json' -d @- <<EOF
 {
   "description": "A subscription to get ticket predictions",
   "subject": {
@@ -13,24 +13,22 @@ curl -v http://192.168.49.2:31149/v2/subscriptions -s -S -H 'Content-Type: appli
       "predictionId",
       "socketId",
       "predictionValue",
-      "year",
-      "month",
-      "day",
+      "name",
+      "weekday",
       "time"
   	]
 	}
   },
   "notification": {
 	"http": {
-  	"url": "http://web-service.tfm:3000/notify"
+  	"url": "http://web-service:3000/notify"
 	},
 	"attrs": [
       "predictionId",
       "socketId",
       "predictionValue",
-      "year",
-      "month",
-      "day",
+      "name",
+      "weekday",
       "time"
 	]
   },

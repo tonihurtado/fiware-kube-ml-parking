@@ -1,0 +1,1 @@
+./spark/bin/spark-shell --conf "spark.mongodb.input.uri=mongodb://192.168.49.2:30347/tfm.parking?readPreference=primaryPreferred" --packages org.mongodb.spark:mongo-spark-connector_2.12:3.0.1

@@ -1,4 +1,4 @@
-curl http://192.168.49.2:31149/v2/entities -s -S -H 'Content-Type: application/json' -d @- <<EOF
+curl  http://192.168.49.2:30467/v2/entities -s -S -H 'Content-Type: application/json' -d @- <<EOF
 {
   "id": "ReqTicketPrediction1",
   "type": "ReqTicketPrediction",
@@ -10,23 +10,27 @@ curl http://192.168.49.2:31149/v2/entities -s -S -H 'Content-Type: application/j
     "value": 0,
     "type": "String"
   },
+  "name":{
+    "value": 0,
+    "type": "String"
+  },
   "year":{
     "value": 0,
-    "type": "Integer"
+    "type": "Int"
   },
   "month":{
     "value": 0,
-    "type": "Integer"
+    "type": "Int"
   },
   "day":{
+    "value": 0,
+    "type": "Int"
+  },
+  "weekday": {
     "value": 0,
     "type": "Integer"
   },
   "time": {
-    "value": 0,
-    "type": "Integer"
-  },
-  "weekDay": {
     "value": 0,
     "type": "Integer"
   }
@@ -36,12 +40,12 @@ EOF
 
 
 
-curl http://192.168.49.2:31149/v2/entities -s -S -H 'Content-Type: application/json' -d @- <<EOF
+curl http://192.168.49.2:30467/v2/entities -s -S -H 'Content-Type: application/json' -d @- <<EOF
 {
   "id": "ResTicketPrediction1",
   "type": "ResTicketPrediction",
   "predictionId": {
-    "value": 0,
+    "value": "0",
     "type": "String"
   },
   "socketId": {
@@ -50,17 +54,13 @@ curl http://192.168.49.2:31149/v2/entities -s -S -H 'Content-Type: application/j
   },
   "predictionValue":{
     "value": 0,
-    "type": "Float"
-  },
-  "year":{
-    "value": 0,
     "type": "Integer"
   },
-  "month":{
+  "name":{
     "value": 0,
-    "type": "Integer"
+    "type": "String"
   },
-  "day":{
+  "weekday":{
     "value": 0,
     "type": "Integer"
   },

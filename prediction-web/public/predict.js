@@ -18,7 +18,7 @@ $(function () {
 	function renderResult(data) {
 		var html =  `<div id="result-container">
 			<div id="result">0</div>
-			<div id="purchases">purchases</div>
+			<div id="Available spots">purchases</div>
 		</div>` ;
 		document.getElementById('messages').innerHTML = html;
 		let countdown = 0;
@@ -27,7 +27,7 @@ $(function () {
 				countdown++;
 				document.getElementById('messages').innerHTML = `<div id="result-container">
 					<div id="result">${countdown}</div>
-					<div id="purchases">purchases</div>
+					<div id="purchases">Available spots</div>
 				</div>`;
 			} else {
 				interval = null;
@@ -103,12 +103,14 @@ $(function () {
     $("#newForm").on("submit", function () {
         const dateSubmitted = new Date($("#date").val());
         const time = parseInt($('#hourSelect').val());
+		const name =$('#nameSelect').val();
         predictionId = "p-" + Date.now();
         const msg = {
+			name: name,
         	year: dateSubmitted.getUTCFullYear(),
         	month: dateSubmitted.getUTCMonth()+1,
         	day: dateSubmitted.getUTCDate()+1,
-        	weekDay: dateSubmitted.getDay(),
+        	weekday: dateSubmitted.getDay(),
         	time: time,
         	predictionId: predictionId
         }

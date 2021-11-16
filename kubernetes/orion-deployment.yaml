@@ -18,7 +18,7 @@ spec:
         service: orion
     spec:
       containers:
-        - args: ["-dbhost","mongodb-0.mongodb-svc.tfm.svc.cluster.local:27017,mongodb-1.mongodb-svc.tfm.svc.cluster.local:27017,mongodb-2.mongodb-svc.tfm.svc.cluster.local:27017","-rplSet","MainRepSet","-logLevel","DEBUG","-httpTimeout","15000","-dbDisableRetryWrites"] #"-dbuser","$(db_user)","-dbpwd","$(db_password)","-dbSSL","-dbAuthDb","admin",
+        - args: ["-dbhost","mongodb-0.mongodb-svc.tfm.svc.cluster.local:27017,mongodb-1.mongodb-svc.tfm.svc.cluster.local:27017,mongodb-2.mongodb-svc.tfm.svc.cluster.local:27017","-rplSet","MainRepSet","-logLevel","DEBUG","-httpTimeout","15000","-dbDisableRetryWrites","-port","1026"] #"-dbuser","$(db_user)","-dbpwd","$(db_password)","-dbSSL","-dbAuthDb","admin",
           image: fiware/orion
           name: orion
           ports:

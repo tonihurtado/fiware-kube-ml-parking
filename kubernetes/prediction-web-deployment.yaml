@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: web
-        image: tonihurtado/prediction-web:0.4
+        image: tonihurtado/web:1.05
         ports:
         - name: web
           containerPort: 3000

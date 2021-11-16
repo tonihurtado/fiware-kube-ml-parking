@@ -1,4 +1,7 @@
 kubernetes/deprecated
 datalake/
 prediction-web/node_modules
-prediction-web/package.json
+spark-job/spark-3.1.2
+spark-job/lib
+spark-job/target
+spark-job/project

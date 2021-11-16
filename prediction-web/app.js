@@ -4,9 +4,9 @@ const server = require('http').Server(app);
 const io = require('socket.io')(server);
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-const URL_CB = process.env.URL_CB || "http://192.168.49.2:31149/v2/entities";
+const URL_CB = process.env.URL_CB || "http://orion:1026/v2/entities";
 const PORT = process.env.PORT  ? (process.env.PORT) : 3000;
-const MONGO_URI = process.env.MONGO_URI || "mongodb://localhost:27017/test";
+const MONGO_URI = process.env.MONGO_URI || "mongodb://mongodb-svc:27017/tfm";
 const fetch = require('cross-fetch')
 console.log("Orion URL: "+ URL_CB);
 
@@ -69,12 +69,13 @@ server.listen(PORT, function() {
 io.on('connection', function(socket) {
 	console.log('New socket connection');
 	socket.on('predict',(msg)=>{
-		const { year, month, day, weekDay, time, predictionId } = msg;
+		const {name, year, month, day, weekday, time, predictionId } = msg;
 		updateEntity({ 
+			"name": createAttr(name),
 			"year": createAttr(year),
 			"month": createAttr(month),
 			"day": createAttr(day),
-			"weekDay": createAttr(weekDay),
+			"weekday": createAttr(weekday),
 			"time": createAttr(time),
 			"predictionId": createAttr(predictionId),
 			"socketId": createAttr(socket.id)
@@ -88,12 +89,11 @@ app.use(bodyParser.json());
 
 app.post("/notify",function(req,res){
 	if (req.body && req.body.data) {
-		req.body.data.map(({socketId, predictionId, predictionValue, year, month, day, time})=>{
+		req.body.data.map(({socketId, predictionId, predictionValue, name, weekday, time})=>{
 			io.to(socketId.value).emit('messages', {type: "PREDICTION", payload: {
 				socketId: socketId.value,
-				year: year.value,
-				month: month.value,
-				day: day.value,
+				name: name.value,
+				weekday: weekday.value,
 				time: time.value,
 				predictionId: predictionId.value,
 				predictionValue: predictionValue.value

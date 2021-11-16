@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: spark-predict-svc
+  namespace: tfm
+  labels:
+    app: spark
+spec:
+  clusterIP: None
+  selector:
+    job: prediction
+    spark-role: driver
+  ports:
+  - port: 9001
+    targetPort: 9001
+  
