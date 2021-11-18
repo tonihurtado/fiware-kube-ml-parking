@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: web
-        image: tonihurtado/web:1.05
+        image: tonihurtado/web:1.4
         ports:
         - name: web
           containerPort: 3000
