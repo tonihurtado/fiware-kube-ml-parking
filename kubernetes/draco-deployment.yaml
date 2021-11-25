@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    service: draco
+  name: draco
+  namespace: tfm
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: draco
+  strategy: {}
+  template:
+    metadata:
+      namespace: tfm
+      labels:
+        app: draco
+    spec:
+      containers:
+      - name: draco
+        image: tonihurtado/draco:latest
+        imagePullPolicy: Always
+      restartPolicy: Always

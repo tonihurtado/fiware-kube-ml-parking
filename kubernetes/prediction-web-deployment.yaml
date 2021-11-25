@@ -16,7 +16,8 @@ spec:
     spec:
       containers:
       - name: web
-        image: tonihurtado/web:1.4
+        image: tonihurtado/web:1.67
+        imagePullPolicy: Always
         ports:
         - name: web
           containerPort: 3000

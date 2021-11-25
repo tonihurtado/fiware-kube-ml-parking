@@ -30,7 +30,7 @@ spec:
             name: jupyterlab
             port:
               number: 80
-      - path: /mongoui
+      - path: /mongo-ui
         pathType: Prefix
         backend:
           service:
@@ -51,3 +51,10 @@ spec:
             name: orion
             port:
               number: 1026
+      - path: /draco
+        pathType: Prefix
+        backend:
+          service:
+            name: draco
+            port:
+              number: 8080

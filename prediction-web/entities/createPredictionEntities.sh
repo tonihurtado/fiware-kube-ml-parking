@@ -1,4 +1,4 @@
-curl  http://192.168.49.2:30467/v2/entities -s -S -H 'Content-Type: application/json' -d @- <<EOF
+curl $1/v2/entities -s -S -H 'Content-Type: application/json' -d @- <<EOF
 {
   "id": "ReqTicketPrediction1",
   "type": "ReqTicketPrediction",
@@ -40,7 +40,7 @@ EOF
 
 
 
-curl http://192.168.49.2:30467/v2/entities -s -S -H 'Content-Type: application/json' -d @- <<EOF
+curl $1/v2/entities -s -S -H 'Content-Type: application/json' -d @- <<EOF
 {
   "id": "ResTicketPrediction1",
   "type": "ResTicketPrediction",

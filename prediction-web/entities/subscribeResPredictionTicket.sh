@@ -1,4 +1,4 @@
-curl -v  http://192.168.49.2:30467/v2/subscriptions -s -S -H 'Content-Type: application/json' -d @- <<EOF
+curl -v  $1/v2/subscriptions -s -S -H 'Content-Type: application/json' -d @- <<EOF
 {
   "description": "A subscription to get ticket predictions",
   "subject": {

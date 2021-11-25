@@ -4,18 +4,16 @@ curl -v  $1/v2/subscriptions -s -S -H 'Content-Type: application/json' -d @- <<E
   "subject": {
 	"entities": [
   	{
-    	"id": "ReqTicketPrediction1",
-    	"type": "ReqTicketPrediction"
+    	"id": "ResTicketPrediction1",
+    	"type": "ResTicketPrediction"
   	}
 	],
 	"condition": {
   	"attrs": [
       "predictionId",
       "socketId",
+      "predictionValue",
       "name",
-      "year",
-      "month",
-      "day",
       "weekday",
       "time"
   	]
@@ -23,15 +21,13 @@ curl -v  $1/v2/subscriptions -s -S -H 'Content-Type: application/json' -d @- <<E
   },
   "notification": {
 	"http": {
-  	"url": "http://spark-predict-svc:9001"
+  	"url": "http://draco:5050/v2/notify"
 	},
 	"attrs": [
       "predictionId",
       "socketId",
+      "predictionValue",
       "name",
-      "year",
-      "month",
-      "day",
       "weekday",
       "time"
 	]

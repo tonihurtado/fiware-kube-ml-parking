@@ -6,7 +6,7 @@ from datetime import datetime
 
 rs_url = "mongodb://mongodb-0.mongodb-svc.tfm.svc.cluster.local:27017,mongodb-1.mongodb-svc.tfm.svc.cluster.local:27017,mongodb-2.mongodb-svc.tfm.svc.cluster.local:27017/?replicaSet=MainRepSet"
 src_url = "https://datosabiertos.malaga.eu/recursos/aparcamientos/ocupappublicosmun/ocupappublicosmunfiware.json"
-collection_name = "parking-test"
+collection_name = "parking"
 dt = datetime.now().strftime("%Y-%m-%dT%H%M")
 
 def addDate(it):

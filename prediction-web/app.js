@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const URL_CB = process.env.URL_CB || "http://tfm.test/orion" //"http://orion:1026/v2/entities";
 const PORT = process.env.PORT ? (process.env.PORT) : 3000;
-const MONGO_URI = process.env.MONGO_URI || "mongodb://tfm.test/orion/tfm";
+const MONGO_URI = process.env.MONGO_URI || "mongodb://mongodb-svc:27017/sth_test";
 const fetch = require('cross-fetch')
 console.log("Orion URL: " + URL_CB);
 
@@ -17,19 +17,6 @@ const connectWithRetry = () => {
         console.log('MongoDB connection with web unsuccessful, retry after 5 seconds.');
         setTimeout(connectWithRetry, 5000);
     })
-}
-
-const find = (name, query, cb) => {
-    mongoose.connection.db.collection(name, function(err, collection) {
-        if (err) {
-            cb(err);
-        } else {
-            collection.find(query).toArray(function(err, results) {
-                console.log(err)
-                cb(err, results);
-            });
-        }
-    });
 }
 
 connectWithRetry()
@@ -107,22 +94,44 @@ app.post("/notify", function(req, res) {
 });
 
 const fromEntries = arr => Object.assign({}, ...Array.from(arr, ([k, v]) => ({
-    [k]: v })));
+    [k]: v
+})));
 
-app.get("/predictions", (req, res) => {
-    find("sth_x002f", undefined, (err, predictions) => {
-        if (err) {
-            res.sendStatus(500);
-        } else {
-            var obj = predictions.reverse().reduce((acc, el, i) => {
-                return {...acc, [el.recvTime]: [...(acc[el.recvTime] || []), [el.attrName, el.attrValue]] }
-            }, {})
+const Pred = mongoose.model('Pred', mongoose.Schema({
+    _id: String,
+    recvTime: String,
+    entityId: String,
+    entityType: String,
+    attrName: String,
+    attrType: String,
+    attrValue: String,
+    attrMetadata: Array
+}, { collection: 'sth_x002f' }));
 
-            for (let i in obj) {
-                obj[i] = fromEntries(obj[i]);
-            }
-            res.json(obj);
-        }
-
-    });
+app.get("/predictions", async(req, res) => {
+    const posts = await Pred.find()
+    var obj = posts.reverse().reduce((acc, el, i) => {
+        return {...acc, [el.recvTime]: [...(acc[el.recvTime] || []), [el.attrName, el.attrValue]] }
+    }, {})
+    for (let i in obj) {
+        obj[i] = fromEntries(obj[i]);
+    }
+    console.log(obj)
+    res.json(obj);
 })
+
+// find("sth_x002f", {}, (err, predictions) => {
+//     if (err) {
+//         console.log("Error fetching collection")
+//         res.sendStatus(500);
+//     } else {
+//         console.log(predictions)
+//         var obj = predictions.reverse().reduce((acc, el, i) => {return {...acc, [el.recvTime]: [...(acc[el.recvTime] || []), [el.attrValue]] }}, {})
+
+//         for (let i in obj) {
+//             obj[i] = fromEntries(obj[i]);
+//         }
+//         res.json(obj);
+//     }
+
+// });

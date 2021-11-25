@@ -1,43 +1,168 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-	<meta charset="UTF-8">
-	<title>FIWARE Purchase volume prediction</title>
-	<script src="socket.io.js"></script>
-	<script src="jquery-1.10.1.min.js"></script>
-	<script src="bootstrap.min.js"></script>
-	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-	<link rel="stylesheet" href="bootstrap.min.css"></link>
-	<link rel="stylesheet" href="basic.css"></link>
-	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>TFM</title>
+    <script src="https://cdn.socket.io/4.2.0/socket.io.min.js" integrity="sha384-PiBR5S00EtOj2Lto9Uu81cmoyZqR57XcOna1oAuVuIEjzj0wpqDVfD0JA9eXlRsj" crossorigin="anonymous"></script>
+    <script src="jquery-1.10.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="bulma-calendar.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/15181efa86.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://unpkg.com/bulma@0.9.0/css/bulma.min.css" />
+    <link rel="stylesheet" type="text/css" href="../css/register.css">
+    <link href="basic.css" rel="stylesheet" />
+    <link href="bulma-calendar.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="basic.css"></link>
 </head>
+
 <body>
-	<div class="container">
-		<img id="logo" src="fi-ware_logo.png">
-		<a href="/" style="float: right; margin: 10px;"><button class="btn btn-link" >Predict</button></a>
-		<br/><br/>
-		<h1>Prediction history</h1>
-		<br/>
-	  	<div class="row">
-	      <div class="col-12">
-		      <table class="table table-predictions">
-				<thead class="">
-				 <tr>
-				   <th scope="col">Date</th>
-				   <th scope="col">Time</th>
-				   <th scope="col"># Predicted Purchases</th>
-				 </tr>
-				</thead>
-				<tbody>
-				  
-				</tbody>
-		      </table>
-	      	</div>
-      	</div>
-	</div>
-	<br/><br/>
-	<script src="/db.js"></script>
+    <section class="container">
+        <div class="columns is-multiline is-vcentered">
+            <div class="column is-12 register">
+                <div class="columns">
+                    <div class="column left is-one-third">
+                        <h1 class="title is-1">Ocupación Parkings Málaga</h1>
+                        <h2 class="subtitle colored is-4">Trabajo de fin de Máster. UPM</h2>
+                        <p>Predictor de la ocupación de los parkings públicos de la ciudad de Málaga, utilizando OpenData, FIWARE y Kubernetes. </p>
+                        <br/>
+                        <nav class="level">
+                            <div class="level-left">
+                                <div class="level-item">
+                                    <span class="icon">
+                                        <i class="fab fa-github"></i>
+                                    </span> &emsp;
+                                    <span class="icon">
+                                        <i class="fas fa-envelope"></i>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="level-right">
+                            </div>
+                        </nav>
+                        <small class="level-item" style="color: var(--textLight)">
+							Proyecto desarrollado por: Jose Antonio Hurtado Morón
+						</small>
+                    </div>
+                    <div class="column right has-text-centered is-two-thirds">
+                        <div class="block">
+                            <h1 class="title is-4">Historial de predicciones</h1>
+                            <p class="description"></p>
+                        </div>
+                        <br/>
+                        <div class="block">
+                            <div class="columns is-gapless is-multiline">
+                                <div class="column">
+                                    <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+                                        <thead class="">
+                                            <tr>
+                                                <th scope="col">Parking</th>
+                                                <th scope="col">Dia</th>
+                                                <th scope="col">Hora</th>
+                                                <th scope="col">Plazas predecidas</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="/db.js"></script>
 </body>
+<style>
+     :root {
+        --brandColor: hsl(204, 86%, 53%);
+        --background: rgb(247, 247, 247);
+        --textDark: hsla(0, 0%, 0%, 0.66);
+        --textLight: hsla(0, 0%, 0%, 0.33);
+    }
+    
+    body {
+        background: var(--background);
+        height: 100vh;
+        color: var(--textDark);
+    }
+    
+    .field:not(:last-child) {
+        margin-bottom: 1rem;
+    }
+    
+    .register {
+        margin-top: 10rem;
+        background: white;
+        border-radius: 10px;
+    }
+    
+    .left,
+    .right {
+        padding: 4.5rem;
+    }
+    
+    .left {
+        border-right: 5px solid var(--background);
+    }
+    
+    .left .title {
+        font-weight: 800;
+        letter-spacing: -2px;
+    }
+    
+    .left .colored {
+        color: var(--brandColor);
+        font-weight: 500;
+        margin-top: 1rem !important;
+        letter-spacing: -1px;
+    }
+    
+    .left p {
+        color: var(--textLight);
+        font-size: 1.15rem;
+    }
+    
+    .right .title {
+        font-weight: 800;
+        letter-spacing: -1px;
+    }
+    
+    .right .description {
+        margin-top: 1rem;
+        margin-bottom: 1rem !important;
+        color: var(--textLight);
+        font-size: 1.15rem;
+    }
+    
+    .right small {
+        color: var(--textLight);
+    }
+    
+    input {
+        font-size: 1rem;
+    }
+    
+    input:focus {
+        border-color: var(--brandColor) !important;
+        box-shadow: 0 0 0 1px var(--brandColor) !important;
+    }
+    
+    .fab,
+    .fas {
+        color: var(--textLight);
+        margin-right: 1rem;
+    }
+    
+    .datetimepicker {
+        z-index: 99;
+        border-radius: 4px;
+    }
+</style>
 
 </html>

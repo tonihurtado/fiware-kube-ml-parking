@@ -10,6 +10,7 @@ spec:
   ports:
     - port: 1026
       targetPort: 1026
+      nodePort: 30329
   selector:
     service: orion
 status:

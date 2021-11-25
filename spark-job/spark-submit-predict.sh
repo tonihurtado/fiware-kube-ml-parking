@@ -1,13 +1,13 @@
-
 #!/bin/bash
+CLUSTER_IP=$(minikube ip)
 ./spark-3.1.2/bin/spark-submit \
-    --master k8s://https://192.168.49.2:8443 \
+    --master k8s://$CLUSTER_IP:8443 \
     --deploy-mode cluster \
     --name spark-prediction \
     --class org.fiware.cosmos.orion.spark.connector.prediction.Prediction \
     --packages "org.mongodb.spark:mongo-spark-connector_2.12:3.0.1" \
     --conf "spark.executor.instances=1" \
-    --conf "spark.kubernetes.container.image=tonihurtado/spark:$1" \
+    --conf "spark.kubernetes.container.image=tonihurtado/spark:${1:-2.013-pred}" \
     --conf "spark.kubernetes.namespace=tfm" \
     --conf "spark.kubernetes.authenticate.driver.serviceAccountName=spark" \
     --conf "spark.driver.extraJavaOptions=-Divy.cache.dir=/tmp -Divy.home=/tmp" \
