@@ -31,8 +31,7 @@ echo "🛀 Running sink Job..."
 kubectl apply -f kubernetes/Jobs/sink-job.yaml
 sleep 5
 echo "🍎 Creating ORION entities and subscriptions..."
-pushd
-cd prediction-web/entities
+pushd prediction-web/entities
 sh curlEntities.sh
 sleep 10
 popd

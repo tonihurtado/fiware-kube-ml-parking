@@ -17,6 +17,8 @@ CLUSTER_IP=$(minikube ip)
     --class org.fiware.cosmos.orion.spark.connector.prediction.Train \
     --packages "org.mongodb.spark:mongo-spark-connector_2.12:3.0.1" \
     --conf "spark.executor.instances=1" \
+    --conf "spark.executor.cores=4" \
+    --conf "spark.executor.memory=12G"   \
     --conf "spark.kubernetes.container.image=tonihurtado/spark:$1" \
     --conf "spark.kubernetes.namespace=tfm" \
     --conf "spark.kubernetes.authenticate.driver.serviceAccountName=spark" \
